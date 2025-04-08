@@ -7,7 +7,7 @@ const giphyImg = document.getElementById("giphy-img");
 let globalMetric = null || "uk";
 
 async function fetchGiphy(value = "cats") {
-  // img.classList.add("loading");
+  giphyImg.classList.add("loading");
 
   try {
     const response = await fetch(
@@ -18,7 +18,7 @@ async function fetchGiphy(value = "cats") {
     const newUrl = data.data.images.original.url;
 
     giphyImg.onload = () => {
-      // img.classList.remove("loading");
+      giphyImg.classList.remove("loading");
       console.log("Image loaded: ", newUrl);
     };
 
@@ -26,7 +26,7 @@ async function fetchGiphy(value = "cats") {
   } catch (error) {
     console.error("Failed to fetch image", error);
     giphyImg.alt = "No GIF available";
-    // img.classList.remove("loading");
+    giphyImg.classList.remove("loading");
   }
 }
 async function getWeatherInfo(location = "mumbai", metric = globalMetric) {

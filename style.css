@@ -1,10 +1,9 @@
 :root {
   --grey: #d9d9d9;
-  --dark-grey: #D0D0D0;
+  --dark-grey: #d0d0d0;
   --purple: #70329a;
   --dark-purple: #150022;
   --white: #ffffff;
-
 }
 
 html,
@@ -57,7 +56,7 @@ input::placeholder {
 
 #metric-btn {
   background-color: var(--grey);
-  color: black; 
+  color: black;
   cursor: pointer;
   border: 1px solid var(--bg);
   border-radius: 4px;
@@ -89,6 +88,14 @@ h2 {
   display: flex;
 }
 
+#giphy-img.loading {
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+#giphy-img {
+  transition: opacity 0.3s ease;
+}
 
 /* #giphy-container { */
 /*   background-color: var(--grey); */
