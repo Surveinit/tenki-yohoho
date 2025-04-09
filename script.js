@@ -4,6 +4,7 @@ const GIPHY_API_KEY = "OG4jeshCvR7NMgLSNPAE0NikVISMNPfw";
 const VISUAL_CROSSING_API_KEY = "TAP3W2GBFH8WRYFRZ59K79JKZ";
 const metricBtn = document.getElementById("metric-btn");
 const giphyImg = document.getElementById("giphy-img");
+const locationValue = document.getElementById("search-input").value;
 let globalMetric = null || "uk";
 
 async function fetchGiphy(value = "cats") {
@@ -56,6 +57,10 @@ async function convertMetric() {
     metricBtn.textContent = "Celcius 🔁";
     globalMetric = "uk";
   }
+  if (metricBtn) {
+    console.log("convertmetric", locationValue);
+    showWeather(locationValue, globalMetric);
+  }
   console.log(globalMetric);
 }
 
@@ -77,7 +82,6 @@ metricBtn.addEventListener("click", function (event) {
 
 searchForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  const locationValue = document.getElementById("search-input").value;
   showWeather(locationValue);
 });
 
