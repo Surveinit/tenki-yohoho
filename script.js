@@ -4,7 +4,6 @@ const GIPHY_API_KEY = "OG4jeshCvR7NMgLSNPAE0NikVISMNPfw";
 const VISUAL_CROSSING_API_KEY = "TAP3W2GBFH8WRYFRZ59K79JKZ";
 const metricBtn = document.getElementById("metric-btn");
 const giphyImg = document.getElementById("giphy-img");
-const locationValue = document.getElementById("search-input").value;
 let globalMetric = null || "uk";
 
 async function fetchGiphy(value = "cats") {
@@ -35,6 +34,14 @@ async function getWeatherInfo(location = "mumbai", metric = globalMetric) {
     const response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${metric}&include=current&key=${VISUAL_CROSSING_API_KEY}&contentType=json`,
     );
+
+    if (!response.ok) {
+      const errorText = await response.text(); // get raw text if it's not JSON
+      throw new Error(
+        `Fetch failed: ${response.status} ${response.statusText}\n${errorText}`,
+      );
+    }
+
     const data = await response.json();
     const description = data.days[0].description;
     const temp = data.days[0].temp;
@@ -50,6 +57,8 @@ async function getWeatherInfo(location = "mumbai", metric = globalMetric) {
 
 async function convertMetric() {
   const metricText = metricBtn.textContent;
+  const locationValue = document.getElementById("search-input").value;
+
   if (metricText == "Celcius 🔁") {
     metricBtn.textContent = "Farenheit 🔁";
     globalMetric = "us";
@@ -82,6 +91,7 @@ metricBtn.addEventListener("click", function (event) {
 
 searchForm.addEventListener("submit", function (event) {
   event.preventDefault();
+  const locationValue = document.getElementById("search-input").value;
   showWeather(locationValue);
 });
 
